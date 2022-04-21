@@ -3,23 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
 </head>
 <body>
 <!--form to add item-->
+<h1>Add new Item</h1>
 
-    <form action="#" th:action="@{/items/new}" th:object="${item}" method="post">
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name">
-        <br>
-        <label for="price">Price:</label>
-        <input type="text" name="price" id="price">
-        <br>
-        <label for="category">Category:</label>
-        <select name="category" id="category">
-            <option th:each="category:${categories}" th:value="${category.name}" th:text="${category.name}"/>
-        </select>
-        <br>
-        <input type="submit" value="Add Item">
-    </form>
+<form action="#" th:action="@{/items/new}" th:object="${item}" method="post">
+    <label for="name">Name:</label>
+    <br>
+    <input type="text" name="name" id="name">
+    <br>
+    <label for="price">Price:</label>
+    <br>
+    <input type="text" name="price" id="price">
+    <br>
+    <label for="category">Category:</label>
+    <br>
+    <select name="category" id="category">
+        <option th:each="category:${categories}" th:value="${category.name}" th:text="${category.name}"/>
+    </select>
+    <br>
+    <input type="submit" value="Add Item">
+</form>
 </body>
 </html>
