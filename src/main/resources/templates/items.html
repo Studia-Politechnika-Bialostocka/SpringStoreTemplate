@@ -9,5 +9,9 @@
 <ol th:each="item : ${items}" th:text="${item.name + ' '  + item.price + ' ' + item.category.name}">
     <li>ietm dsasadf</li>
 </ol>
+<br/>
+<a th:href="@{/items/new}">Add new item</a>
+
+
 </body>
 </html>

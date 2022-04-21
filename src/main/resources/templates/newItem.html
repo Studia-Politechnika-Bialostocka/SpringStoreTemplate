@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--form to add item-->
+
+    <form action="#" th:action="@{/items/new}" th:object="${item}" method="post">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name">
+        <br>
+        <label for="price">Price:</label>
+        <input type="text" name="price" id="price">
+        <br>
+        <label for="category">Category:</label>
+        <select name="category" id="category">
+            <option th:each="category:${categories}" th:value="${category.name}" th:text="${category.name}"/>
+        </select>
+        <br>
+        <input type="submit" value="Add Item">
+    </form>
+</body>
+</html>
