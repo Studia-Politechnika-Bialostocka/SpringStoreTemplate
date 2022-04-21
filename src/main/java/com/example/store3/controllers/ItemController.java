@@ -20,7 +20,6 @@ public class ItemController {
     @GetMapping("/")
     public String getItems(Model model) {
         model.addAttribute("items", items.getItems());
-        System.out.println("Items " + items.getItems());
         return "items";
     }
 
@@ -49,6 +48,12 @@ public class ItemController {
     public String addItem(@ModelAttribute Item item, Model model) {
         System.out.println("Item " + item);
         this.items.addItem(item);
+        return "redirect:/items/";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteItem(@PathVariable("id") int id) {
+        this.items.deleteItem(id);
         return "redirect:/items/";
     }
 

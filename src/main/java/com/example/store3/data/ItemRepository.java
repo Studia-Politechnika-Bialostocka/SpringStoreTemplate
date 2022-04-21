@@ -49,4 +49,8 @@ public class ItemRepository {
 
         return result;
     }
+
+    public void deleteItem(int id) {
+        this.items.remove(id);
+    }
 }
