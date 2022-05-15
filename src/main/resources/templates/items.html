@@ -4,28 +4,40 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    
 </head>
 <body>
 <h1 th:text="|Items in store|"></h1>
-<ul>
-    <li th:each="item, iter : ${items}" style="display: flex; align-items: center">
-        <div style="margin-right: 10px">
-            <span th:text="${iter.index}"></span>
-            <span th:text="${item.name}"></span>
-            <span th:text="${item.price}"></span>
-            <span th:text="${item.category.name}"></span>
-        </div>
-        <form action="#" th:action="@{'/items/{id}'(id=${iter.index})}" th:method="delete">
 
-            <button type="submit">Delete</button>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="item, iter : ${items}">
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.price}"></td>
+        <td th:text="${item.category.name}"></td>
+        <td>
+            <form action="#" th:action="@{'/items/{id}'(id=${iter.index})}" th:method="delete">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+</table>
 
+<!--<ul>-->
+<!--    <li th:each="item, iter : ${items}" style="display: flex; align-items: center">-->
+<!--        <div style="margin-right: 10px">-->
+<!--            <span th:text="${iter.index}"></span>-->
+<!--            <span th:text="${item.name}"></span>-->
+<!--            <span th:text="${item.price}"></span>-->
+<!--            <span th:text="${item.category.name}"></span>-->
+<!--        </div>-->
 
-        </form>
-    </li>
-</ul>
+<!--    </li>-->
+<!--</ul>-->
 
 
 <br/>
