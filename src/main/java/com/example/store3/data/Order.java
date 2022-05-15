@@ -3,11 +3,15 @@ package com.example.store3.data;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.util.HashMap;
+
 @Data
 @RequiredArgsConstructor
-public class Item {
+
+public class Order {
     private final Integer id;
-    private final String name;
-    private final float price;
-    private final ItemCategory category;
+    private final HashMap<Item, Integer> items;
+    private final boolean isFinished;
+
+
 }

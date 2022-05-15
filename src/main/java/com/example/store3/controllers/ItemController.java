@@ -46,7 +46,6 @@ public class ItemController {
 
     @PostMapping("/new")
     public String addItem(@ModelAttribute Item item, Model model) {
-        System.out.println("Item " + item);
         this.items.addItem(item);
         return "redirect:/items/";
     }

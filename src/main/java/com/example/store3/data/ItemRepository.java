@@ -19,13 +19,12 @@ public class ItemRepository {
         categories.add(new ItemCategory("dairy"));
         categories.add(new ItemCategory("snacks"));
 
-        items.add(new Item("milk", 12.44f, categories.get(0)));
-        items.add(new Item("protein bar", 12.58f, categories.get(1)));
+        items.add(new Item(1, "milk", 12.44f, categories.get(0)));
+        items.add(new Item(2, "protein bar", 12.58f, categories.get(1)));
     }
 
     public Item getItem(int id) {
-        if (id >= items.size()) return null;
-        return items.get(id);
+        return this.items.stream().filter(item -> item.getId() == id).findAny().orElse(null);
     }
 
     public ItemCategory getCategory(String name) {
@@ -35,7 +34,8 @@ public class ItemRepository {
     }
 
     public void addItem(Item item) {
-        this.items.add(item);
+        Integer nextId = this.items.stream().mapToInt(Item::getId).max().orElse(0) + 1;
+        this.items.add(new Item(nextId, item.getName(), item.getPrice(), item.getCategory()));
     }
 
     public void removeItem(int id) {

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+
+</head>
+<body>
+<h1 th:text="|Orders|"></h1>
+<hr>
+<a href="/e-store/items/">Go to items</a>
+
+
+<div th:each="order, iter : ${orders}">
+<!--    <a href="/orders/ + ${order.id}">-->
+    <a th:href="@{/orders/{id}(id=${order.id})}">
+        <h2 th:text="Order_ + ${order.id}"></h2>
+    </a>
+    <table>
+        <tr>
+            <th>L.p</th>
+            <th>Product name</th>
+            <th>Product category</th>
+            <th>Quantity</th>
+            <th>Is finished?</th>
+        </tr>
+        <tr th:each="item, iter : ${order.items}">
+
+            <td th:text="${iter.index+1}"></td>
+            <td th:text="${item.key.name}"></td>
+            <td th:text="${item.key.category.name}"></td>
+            <td th:text="${item.value}"></td>
+            <td th:text="${order.isFinished}"></td>
+    </table>
+</div>
+
+
+</body>
+</html>
