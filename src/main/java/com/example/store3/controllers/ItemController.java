@@ -5,7 +5,10 @@ import com.example.store3.data.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/items")
@@ -40,12 +43,18 @@ public class ItemController {
     @GetMapping("/new")
     public String newItem(Model model) {
         model.addAttribute("categories", this.items.getCategories());
-        System.out.println("Categories " + this.items.getCategories());
+        model.addAttribute("item", new Item());
         return "newItem";
     }
 
     @PostMapping("/new")
-    public String addItem(@ModelAttribute Item item, Model model) {
+    public String addItem(@Valid Item item, BindingResult result) {
+        System.out.println("result " + result.hasErrors());
+        if (result.hasErrors()) {
+            System.out.println(result.getErrorCount());
+            result.getAllErrors().forEach(el -> System.out.println(el.toString()) );
+            return "newItem";
+        }
         this.items.addItem(item);
         return "redirect:/items/";
     }
