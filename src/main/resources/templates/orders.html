@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../static/css/items.css" th:href="@{/css/items.css}" />
+</head>
+<body>
+<div class="container">
+    <h1 th:text="#{orderhome.header}"></h1>
+    <ol class="list">
+
+        <li class="orderListItem" th:if="${pendingOrder}">
+            <h5 th:text="'Pending Order'"></h5>
+            <p th:each="item : ${pendingOrder.items.keySet()}" th:text="|${item.name}, ${item.category.name}, ${item.price} -- Amount: ${pendingOrder.items.get(item)}|"></p>
+            <hr style="width:95%"/>
+            <p><b th:text="|Total cost: ${pendingOrder.totalPrice}|"></b></p>
+            <div th:switch="${#dates.format(pendingOrder.orderDate, 'dd-MM-yyyy')}">
+                <p th:case="${#dates.format(#dates.createNow(), 'dd-MM-yyyy')}" th:text="'date: today'"></p>
+                <p th:case="*" th:text="|date: ${#dates.format(pendingOrder.orderDate, 'dd-MM-yyyy')}|"></p>
+            </div>
+            <p th:text="|time: ${#dates.format(pendingOrder.orderDate, 'HH:mm')}|"></p>
+            <form action="#" th:action="@{'/orders/submit'}" th:method="post" >
+                <input class="addToCartButton" type="submit" id="submitOrder" value="Finalize" />
+            </form>
+        </li>
+        <li class="orderListItem" th:each="order, iter : ${orders}">
+            <p th:each="item : ${order.items.keySet()}" th:text="|${item.name}, ${item.category.name}, ${item.price} -- Amount: ${order.items.get(item)}|"></p>
+            <hr style="width:95%"/>
+            <p><b th:text="|Total cost: ${order.totalPrice}|"></b></p>
+            <div th:switch="${#dates.format(order.orderDate, 'dd-MM-yyyy')}">
+                <p th:case="${#dates.format(#dates.createNow(), 'dd-MM-yyyy')}" th:text="'date: today'"></p>
+                <p th:case="*" th:text="|date: ${#dates.format(order.orderDate, 'dd-MM-yyyy')}|"></p>
+            </div>
+            <p th:text="|time: ${#dates.format(order.orderDate, 'HH:mm')}|"></p>
+        </li>
+    </ol>
+    <a class="addButton" th:href="@{/items/}">Add</a>
+</div>
+</body>
+</html>

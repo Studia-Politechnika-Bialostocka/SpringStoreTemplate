@@ -6,8 +6,10 @@ import com.example.store3.data.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,25 +32,32 @@ public class ItemController {
 
     @GetMapping("/category")
     public String getItemsFromCategory(@RequestParam(value = "name", defaultValue = "snacks") String category, Model model) {
-        model.addAttribute("items", this.items.getItemsFromCategory(category));
+        model.addAttribute("items", items.getItemsFromCategory(category));
         model.addAttribute("category", category);
         return "items";
     }
 
     @GetMapping("/{id}")
     public String getItem(@PathVariable("id") int id, Model model) {
-        model.addAttribute("item", this.items.getItem(id));
+        model.addAttribute("item", items.getItem(id));
         return "item";
     }
 
     @GetMapping("/add")
     public String addForm(Model model) {
-        model.addAttribute("categories", this.items.getCategories());
+        model.addAttribute("categories", items.getCategories());
+        model.addAttribute("item", new Item());
         return "addForm";
     }
 
     @PostMapping("/add")
-    public String addItem(@ModelAttribute Item item, Model model) {
+    public String addItem(@Valid @ModelAttribute Item item, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("categories", items.getCategories());
+            model.addAttribute("item", item);
+            return "addForm";
+        }
+
         this.items.addItem(item);
         return "redirect:/items/";
     }

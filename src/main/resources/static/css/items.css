@@ -1,0 +1,107 @@
+.body, html {
+    background-color: azure;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+ol {
+
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+
+}
+
+.deleteButton {
+    padding: 3px 10px;
+    background-color: azure;
+    border-radius: 0px 3px 0px 3px;
+    border: 1px solid red;
+    margin-left: auto;
+    transition-duration: 0.2s;
+}
+
+.deleteButton:hover {
+    background-color: red;
+    color: azure;
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.addToCartButton {
+    padding: 3px 10px;
+    background-color: azure;
+    border-radius: 0px 3px 0px 3px;
+    border: 1px solid lightgreen;
+    /*margin-left: auto;*/
+    float: right;
+    transition-duration: 0.2s;
+}
+
+.addToCartButton:hover {
+    background-color: lightgreen;
+    color: azure;
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.addButton {
+    padding: 3px 0px;
+    width: 25%;
+    background-color: azure;
+    border-radius: 0px 3px 0px 3px;
+    border: 1px solid midnightblue;
+    text-decoration: none;
+    text-align: center;
+    color: midnightblue;
+    transition-duration: 0.2s;
+}
+
+.addButton:hover {
+    background-color: midnightblue;
+    color: azure;
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.list {
+    row-gap: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.listItem {
+    border: 2px solid deepskyblue;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    width: 25vw;
+}
+
+form {
+    margin-left: auto;
+}
+
+.orderListItem {
+    border: 2px solid deepskyblue;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+}

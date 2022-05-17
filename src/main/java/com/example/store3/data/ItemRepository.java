@@ -18,6 +18,7 @@ public class ItemRepository {
     public ItemRepository(){
         categories.add(new ItemCategory("dairy"));
         categories.add(new ItemCategory("snacks"));
+        categories.add(new ItemCategory("xd"));
 
         items.add(new Item("milk", 12.44f, categories.get(0)));
         items.add(new Item("protein bar", 12.58f, categories.get(1)));

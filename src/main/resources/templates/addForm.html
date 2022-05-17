@@ -16,7 +16,17 @@
     <select id="category" name="category">
         <option th:each="cat : ${categories}" th:value="${cat.name}" th:text="${cat.name}"/>
     </select>
+
     <br>
+
+    <div th:if="${#fields.hasAnyErrors()}">
+        <ul>
+            <li style="color:red" th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+        </ul>
+    </div>
+
+    <br>
+
     <input type="submit" value="Add Item">
 </form>
 </body>
