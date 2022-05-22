@@ -15,9 +15,9 @@
         <span>
              <select class="form-select form-select-lg mb-md-3" th:field="*{category}">
              <option value="">select category</option>
-             <option th:each="option : ${categories}" th:value="${option.cat_name}" th:text="${option.cat_name}"></option>
+             <option th:each="option : ${categories}" th:value="${option.id}" th:text="${option.name}"></option>
             </select>
-        </span><span class="alert alert-primary" th:if="${#fields.hasErrors('category.cat_name')}" th:errors="*{category.cat_name}">Category Error</span>
+        </span><span class="alert alert-primary" th:if="${#fields.hasErrors('category.name')}" th:errors="*{category.name}">Category Error</span>
 
 <!--        @notempty-->
 <!--        <span>-->

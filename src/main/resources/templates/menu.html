@@ -8,12 +8,12 @@
 <body>
 <div th:fragment="menu">
     <div th:with="current=${#strings.substringAfter(#httpServletRequest.requestURI,#httpServletRequest.getContextPath())}">
-        <a th:if="${current=='/items/'}" th:text="#{menu.print_all.msg}">Print items</a>
-        <a th:if="${current!='/items/'}" th:href="@{/items/}" th:text="#{menu.print_all.msg}">Print items</a>
-        <a th:if="${current=='/cart/'}"  th:text="#{menu.show_cart.msg}">Show cart</a>
-        <a th:if="${current!='/cart/'}" th:href="@{/cart/}" th:text="#{menu.show_cart.msg}">Show cart</a>
-        <a th:if="${current=='/items/category/add'}"  th:text="'Add category'">Add category</a>
-        <a th:if="${current!='/items/category/add'}" th:href="@{/items/category/add}" th:text="'Add category'">Add category</a>
+        <a class="btn btn-outline-success mx-1" th:if="${current=='/items/'}" th:text="#{menu.print_all.msg}">Print items</a>
+        <a class="btn btn-outline-success mx-1" th:if="${current!='/items/'}" th:href="@{/items/}" th:text="#{menu.print_all.msg}">Print items</a>
+        <a class="btn btn-outline-success mx-1" th:if="${current=='/cart/'}"  th:text="#{menu.show_cart.msg}">Show cart</a>
+        <a class="btn btn-outline-success mx-1" th:if="${current!='/cart/'}" th:href="@{/cart/}" th:text="#{menu.show_cart.msg}">Show cart</a>
+        <a class="btn btn-outline-success mx-1" th:if="${current=='/items/category/add'}"  th:text="'Add category'">Add category</a>
+        <a class="btn btn-outline-success mx-1" th:if="${current!='/items/category/add'}" th:href="@{/items/category/add}" th:text="'Add category'">Add category</a>
 <!--        <a th:if="${current=='/items/search/'}"  th:text="#{menu.search_items.msg}">Search items</a>-->
 <!--        <a th:if="${current!='/items/search/'}" th:href="@{/items/search/}" th:text="#{menu.search_items.msg}">Search items</a>-->
     </div>

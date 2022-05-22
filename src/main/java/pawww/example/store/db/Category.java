@@ -21,6 +21,12 @@ public class Category {
     @Column(name = "name", nullable = false, length = 20)
     private String name;
 
+    public Category(String name) {
+        this.name = name;
+    }
 
+    public Category() {
+
+    }
 
 }

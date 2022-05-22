@@ -5,9 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pawww.example.store.data.Category;
-import pawww.example.store.data.Item;
-import pawww.example.store.repositories.ItemRepository;
+import pawww.example.store.db.Category;
+import pawww.example.store.db.Item;
+import pawww.example.store.db.repositories.ItemRepositoryDB;
 import pawww.example.store.services.StoreService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +22,9 @@ public class ItemsController {
     @Autowired
     //ItemRepository items;
     StoreService service;
+
+    @Autowired
+    ItemRepositoryDB items;
 
 
 
@@ -58,74 +61,74 @@ public class ItemsController {
     }
 
 
-//    @PostMapping("/add")
-//    public String addItem(Model model) {
-//        //@notempty
-//       // Item item2add=new Item("milk",3.56f,this.items.getCategory("dairy"), this.items.getCategories());
-//        Item item2add=new Item("milk",3.56f,this.items.getCategory("dairy"));
-//        this.items.addItem(item2add);
-//        System.out.println("add item in controller "+this.items);
-//        model.addAttribute("items",this.items.getItems());
-//        return "items";
-//    }
+    @PostMapping("/add")
+    public String addItem(Model model) {
+        //@notempty
+       // Item item2add=new Item("milk",3.56f,this.items.getCategory("dairy"), this.items.getCategories());
+        Item item2add=new Item("milk",3.56f, service.getCategory("dairy"));
+        service.addItem(item2add);
+        System.out.println("add item in controller "+this.items);
+        model.addAttribute("items",service.getItems());
+        return "items";
+    }
 
-//    @GetMapping(value={"/delete/{id}","/delete/"})
-//    public String deleteItem(@PathVariable Optional<Integer> id, Model model) {
-//        int iid= id.isPresent() ? id.get() : 0;
-//        this.items.removeItem(iid);
-//        System.out.println("remove item in controller "+this.service.getItems());
-//        model.addAttribute("items",this.service.getItems());
-//        return "items";
-//    }
+    @GetMapping(value={"/delete/{id}","/delete/"})
+    public String deleteItem(@PathVariable Optional<Integer> id, Model model) {
+        int iid= id.isPresent() ? id.get() : 0;
+        service.removeItem(iid);
+        System.out.println("remove item in controller "+this.service.getItems());
+        model.addAttribute("items",this.service.getItems());
+        return "items";
+    }
 
-//    @GetMapping("/search")
-//    public String searchItems(@RequestParam(value = "name", defaultValue = "") String name, Model model) {
-//        if(!name.isEmpty()) model.addAttribute("items", this.items.searchItems(name));
-//        model.addAttribute("query", name);
-//        model.addAttribute("categories",this.items.getCategories());
-//        return "items";
-//
-//    }
+    @GetMapping("/search")
+    public String searchItems(@RequestParam(value = "name", defaultValue = "") String name, Model model) {
+        if(!name.isEmpty()) model.addAttribute("items", service.searchItems(name));
+        model.addAttribute("query", name);
+        model.addAttribute("categories",service.getCategories());
+        return "items";
 
-//    @GetMapping("/manage/add")
-//    public String manage(Model model){
-//        model.addAttribute("categories",this.items.getCategories());
-//        model.addAttribute("newItem", new Item());
-//        //model.addAttribute("newItemCat", new Category());
-//        return "add_item";
-//    }
+    }
+
+    @GetMapping("/manage/add")
+    public String manage(Model model){
+        model.addAttribute("categories",service.getCategories());
+        model.addAttribute("newItem", new Item());
+        //model.addAttribute("newItemCat", new Category());
+        return "add_item";
+    }
 //
-//    @PostMapping("/manage/add")
-//    public String managePost(@Valid @ModelAttribute("newItem") Item newItem, /*Errors*/ BindingResult result, Model model) {
-//        System.out.println("resuult "+result.hasErrors());
-//            if (result.hasErrors()) {
-//                System.out.println(result.getErrorCount());
-//                result.getAllErrors().forEach(el-> System.out.println(el));
-//                model.addAttribute("categories",this.items.getCategories());
-//                return "add_item";
-//            }
-//            this.items.addItem(newItem);
-//        return "redirect:/items/";
+    @PostMapping("/manage/add")
+    public String managePost(@Valid @ModelAttribute("newItem") Item newItem, /*Errors*/ BindingResult result, Model model) {
+        System.out.println("resuult "+result.hasErrors());
+            if (result.hasErrors()) {
+                System.out.println(result.getErrorCount());
+                result.getAllErrors().forEach(el-> System.out.println(el));
+                model.addAttribute("categories",service.getCategories());
+                return "add_item";
+            }
+            service.addItem(newItem);
+        return "redirect:/items/";
+
+    }
 //
-//    }
+    @GetMapping("/category/add")
+    public String manageCat(Model model){
+        model.addAttribute("newCategory", new Category());
+        return "add_category";
+    }
 //
-//    @GetMapping("/category/add")
-//    public String manageCat(Model model){
-//        model.addAttribute("newCategory", new Category());
-//        return "add_category";
-//    }
-//
-//    @PostMapping("/category/add")
-//    public String manageCatPost(@Valid @ModelAttribute("newCategory") Category newCategory, /*Errors*/ BindingResult result, Model model) {
-//        System.out.println("resuult "+result.hasErrors()+" "+newCategory.getCat_name());
-//        if (result.hasErrors()) {
-//            result.getAllErrors().forEach(el-> System.out.println(el));
-//            return "add_category";
-//        }
-//        this.items.addCategory(newCategory);
-//        return "redirect:/items/";
-//
-//    }
+    @PostMapping("/category/add")
+    public String manageCatPost(@Valid @ModelAttribute("newCategory") Category newCategory, /*Errors*/ BindingResult result, Model model) {
+        System.out.println("resuult "+result.hasErrors()+" "+newCategory.getName());
+        if (result.hasErrors()) {
+            result.getAllErrors().forEach(el-> System.out.println(el));
+            return "add_category";
+        }
+        service.addCategory(newCategory);
+        return "redirect:/items/";
+
+    }
 
 
     }

@@ -22,9 +22,9 @@
         </span>
     </form>
 <ol>
-    <li th:each="item,state:${items}">
+    <li th:each="item:${items}">
         <ul>
-            <li th:text="'Index:'+ ${state.index}"></li>
+            <li th:text="'id:'+ ${item.getId()}"></li>
 <!--            <li th:text="|Name: ${item.name}|"></li>-->
             <li><span  th:text="'Name: '"></span><a th:href="@{'/items/'+${item.id}}" th:text="${item.name}"></a></li>
             <li th:text="|Price: ${item.price} zł|"></li>
@@ -32,7 +32,7 @@
             <li th:if="${category==null}"><span  th:text="|Category: |"></span><a th:href="@{/items/category(name=${item.category.name})}" th:text="${item.category.name}"></a> </li>
         </ul>
 
-        <a th:href="@{'/cart/add/'+${state.index}}">Add to cart</a>
+        <a th:href="@{'/cart/add/'+${item.getId()}}">Add to cart</a>
     </li>
 </ol>
     <a class="btn btn-success" th:href="@{'/items/manage/add/'}" >Add new item</a>
