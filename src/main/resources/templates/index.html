@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.1/css/bootstrap.min.css} "/>
+</head>
+<body>
+<p th:utext="#{home.welcome}">Welcome to our grocery store!</p>
+<a href="/e-store/items/">Print items</a>
+<a th:href="@{/items/}" th:text="#{menu.print_all.msg}">Print items</a>
+<a th:href="@{/items/1}" th:text="#{menu.print_one.msg}">Print the first item</a>
+<h1 th:text="#{welcome}">Hello</h1>
+<form th:action="@{/items/add}" method="post">
+    <input type="submit" value="Add"/>
+</form>
+<a th:href="@{/cart}" th:text="#{menu.print_one.msg}">Show cart</a>
+
+<div th:with="zm='abcsdfge',zm2=null">
+<p th:text="${#strings.isEmpty(zm)}"></p>
+<p th:text="${#strings.isEmpty(zm2)}"></p>
+<p th:text="${#strings.defaultString(zm2,'Empty String')}"></p>
+
+<!--<p th:text="${#strings.indexOf(zm,'bc')}"></p>-->
+<p th:text="${#strings.substring(zm,1,2)}"></p>
+
+<p th:text="${#strings.equals(zm, zm2)}"></p>
+
+<p th:text="${#strings.abbreviate(zm,4)} "></p>
+<p th:text="${#strings.capitalizeWords(zm)}"></p>
+
+    <p class="answer" th:text="${T(java.lang.Math).random()}">123456</p>
+
+
+
+
+
+
+</div>
+
+</body>
+</html>

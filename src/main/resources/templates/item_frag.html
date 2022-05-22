@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.1/css/bootstrap.min.css} "/>
+</head>
+<body>
+<div th:fragment="printItem(index,item_name, item_price, item_cat, linkDetails, linkCategory)">
+
+        <p>Name: <span th:if="${!linkDetails}" th:text="${item_name}"></span>
+            <span th:if="${linkDetails}"> <a th:href="@{'/items/'+${index}}" th:text="${item_name}"></a></span></p>
+        <p>Price: <span th:text="${item_price}"></span></p>
+        <p>Category: <span  th:text="${item_cat}"></span></p>
+
+</div>
+<div th:fragment="addItem">
+<h1>Form</h1>
+    <form action="#" th:action="@{/manage/add}" th:object="${newItem}" method="post">
+        <p>Name: <input type="text" th:field="*{name}" /></p>
+        <p>Price: <input type="number" th:field="*{price}" /></p>
+        <select class="form-select form-select-lg mb-md-3" th:field="*{category.cat_name}">
+            <option value="*">select category</option>
+            <option th:each="option : ${categories}" th:value="${option.cat_name}" th:text="${option.cat_name}"></option>
+        </select>
+        <p><input type="submit" value="Add" /> </p>
+    </form>
+</div>
+</body>
+</html>

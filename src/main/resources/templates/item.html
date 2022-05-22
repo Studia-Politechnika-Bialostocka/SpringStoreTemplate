@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.1/css/bootstrap.min.css} "/>
+</head>
+<body>
+<div class="container">
+    <span th:insert="menu.html :: menu"> </span>
+<h1 th:text="#{item.welcome.msg(${item.name})}">Details</h1>
+    <div th:object="${item}">
+        <p>Name: <span th:text="*{name}"></span></p>
+<!--        <p>Price: <span th:text="*{price}"></span></p>-->
+        <p>Price: <span th:text="*{#numbers.formatDecimal(price,1,2)}"></span>[[#{currency.short}]]</p>
+        <p>Category: <span th:text="*{category.name}"></span></p>
+    </div>
+
+
+<!--    <p>Name: <span th:text="${item.name}"></span></p>-->
+<!--<p>Price: <span th:text="${item.price}"></span></p>-->
+<!--<p>Category: <span th:text="${item.category.cat_name}"></span></p>-->
+</div>
+</body>
+</html>

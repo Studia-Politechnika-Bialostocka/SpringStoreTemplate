@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.1/css/bootstrap.min.css} "/>
+</head>
+<body>
+<div class="container">
+    <span th:insert="menu.html :: menu"> </span>
+    <h1 th:text="|Items in cart|"></h1>
+
+    <span th:text="'Minimum order value is '+${#servletContext.getAttribute('minimumOrderValue')}">Min order value</span>
+<span th:text="'Minimum order value is '+${application.minimumOrderValue}">Min order value</span>
+    <br/>
+
+    Most popular categories:<ul>
+    <li th:each="category:${#session.getAttribute('mostPopularCategories')}" th:text="${category}"></li>
+</ul>
+    Most popular categories:<ul>
+    <li th:each="category:${session.mostPopularCategories}" th:text="${category}"></li>
+</ul>
+
+    <ol>
+        <li th:each="item,state:${cart}">
+            <ul>
+            <li><span  th:text="|Name: ${item.key.name}, Cnt: ${item.value}|"/><a th:href="@{'/cart/addmore/'+${item.key.name}}">Add more</a>
+
+                 </li>
+                <li th:text="|Price: ${item.key.price} zł|"></li>
+                <li th:text="|Category: ${item.key.category.cat_name}|"></li></ul>
+            <a th:href="@{'/cart/remove/'+${item.key.name}}">Remove item</a>
+        </li>
+    </ol>
+
+    <div th:with="zm=${prices}">
+    <p th:text="${#lists.size(zm)>0} ? 'Cart value '+${#numbers.formatDecimal(#aggregates.sum(zm),1,2,'POINT')}+#{currency.short}:'Empty cart'">Cart value</p>
+<!--        <p th:if="${#lists.isEmpty(zm)}" th:text="'Empty cart'">Empty cart</p>-->
+<!--    <p th:text="${#aggregates.sum(array)}"></p>-->
+<!--    <p th:text="${#aggregates.avg(array)}"></p>-->
+<!--    <p th:text="${#aggregates.sum(set)}"></p>-->
+<!--    <p th:text="${#aggregates.avg(set)}"></p>-->
+    </div>
+    <a th:href="@{'/cart/buy/'}">Order now</a>
+    <!--    <div>[[#{cart.promo.msg(${application.promoDate})}]]</div>-->
+    <div>[[#{cart.promo.msg(${#dates.format(application.promoDate,'dd-MM-yyyy')})}]]</div>
+</div>
+</body>
+</html>
