@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.1/css/bootstrap.min.css} "/>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
 </head>
 <body>
-<div class="container">
+<div>
     <span th:insert="menu.html :: menu"> </span>
     <h1 th:text="|Items in cart|"></h1>
 
@@ -22,14 +22,14 @@
 </ul>
 
     <ol>
-        <li th:each="item,state:${cart}">
+        <li th:each="item,state:${cart.getItems()}">
             <ul>
-            <li><span  th:text="|Name: ${item.key.name}, Cnt: ${item.value}|"/><a th:href="@{'/cart/addmore/'+${item.key.name}}">Add more</a>
+            <li><span  th:text="|Name: ${item.name}, Cnt: ${cart.getCount(item.name)}|"/><a th:href="@{'/cart/addmore/'+${item.name}}">Add more</a>
 
                  </li>
-                <li th:text="|Price: ${item.key.price} zł|"></li>
-                <li th:text="|Category: ${item.key.category.cat_name}|"></li></ul>
-            <a th:href="@{'/cart/remove/'+${item.key.name}}">Remove item</a>
+                <li th:text="|Price: ${item.price} zł|"></li>
+                <li th:text="|Category: ${item.category.name}|"></li></ul>
+            <a th:href="@{'/cart/remove/'+${item.name}}">Remove item</a>
         </li>
     </ol>
 

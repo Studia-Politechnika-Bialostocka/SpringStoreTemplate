@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pawww.example.store.data.Category;
+import pawww.example.store.db.Category;
 
 import pawww.example.store.db.Item;
 import pawww.example.store.db.repositories.CategoryRepositoryDB;
@@ -28,40 +28,42 @@ public class StoreService {
 
 
 
-//    public void addToCart(Item item){
-//        this.cart.addItem(item);
-//    }
+    public void addToCart(Item item){
+        this.cart.addItem(item);
+    }
 //
-//    public Item isInCart(String name){
-//        return this.cart.getItem(name);
-//    }
+    public Item isInCart(String name){
+        return this.cart.getItem(name);
+    }
 
-    public List<pawww.example.store.db.Item> getItems() {
+    public List<Item> getItems() {
         return this.items.findAll();
     }
 
-    public List<pawww.example.store.db.Category> getCategories(){return this.categories.findAll();}
+    public List<Category> getCategories(){return this.categories.findAll();}
 
 
     public Item getItem(int id){
-        Optional<pawww.example.store.db.Item> item=items.findById(id);
+        Optional<Item> item=items.findById(id);
         return item.isEmpty()? null:item.get();
     }
 //
 //
-//    public Category getCategory(String name){
-//        return this.items.getCategory(name);
-//    }
+    public Category getCategory(String name){
+        return this.categories.findByName(name);
+    }
 //
     public void addItem(Item item){
         this.items.save(item);
     }
 //
-//    public void addCategory(Category category) {this.items.addCategory(category);}
+    public void addCategory(Category category) {this.categories.save(category);}
 //
     public void removeItem(Item item){
         this.items.delete(item);
     }
+
+    public void removeItem(int id) { items.deleteById(id); }
 
 
 //
@@ -71,9 +73,9 @@ public class StoreService {
         return items.findByCategory_Name(category);
     }
 //
-//    public List<Item> searchItems(String name){
-//        return items.searchItems(name);
-//    }
+    public List<Item> searchItems(String name){
+        return items.findByNameStartingWith(name);
+    }
 
     public List<Category> getMostPopularCategories(){
         List<Category> cats=new LinkedList<>();
