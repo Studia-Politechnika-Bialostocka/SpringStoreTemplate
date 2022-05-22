@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.1/css/bootstrap.min.css} "/>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
 </head>
 <body>
-<div class="ms-2">
+<div>
 <p th:utext="#{home.welcome}">Welcome to our grocery store!</p>
-<a class="btn btn-outline-success mx-1" th:href="@{/items/}" th:text="#{menu.print_all.msg}">Print items</a>
-<a class="btn btn-outline-success mx-1" th:href="@{/items/1}" th:text="#{menu.print_one.msg}">Print the first item</a>
+<a th:href="@{/items/}" th:text="#{menu.print_all.msg}">Print items</a>
+<a th:href="@{/items/1}" th:text="#{menu.print_one.msg}">Print the first item</a>
 <h1 th:text="#{welcome}">Hello</h1>
 <form th:action="@{/items/add}" method="post">
     <input type="submit" value="Add"/>

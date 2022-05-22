@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.1/css/bootstrap.min.css} "/>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
 </head>
 <body>
-<div class="container">
+<div>
     <span th:insert="~{menu :: menu}"></span>
     <h1>Add new item</h1>
     <form action="#" th:action="@{/items/category/add}" th:object="${newCategory}" method="post">
-        <p>Name: <input type="text" th:field="*{name}"/><span class="alert alert-primary"
+        <p>Name: <input type="text" th:field="*{name}"/><span
                                                               th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
         </p>
 

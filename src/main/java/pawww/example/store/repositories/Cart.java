@@ -35,7 +35,15 @@ public class Cart {
         return count;
     }
     public void addItem(Item item) { this.items.add(item); }
-    public void removeItem(int id) {this.items.remove(id); }
+    public void removeItem(int id) {
+        for (Item item: items)
+            if (item.getId() == id) {
+                System.out.println("removing item with id: " + item.getId());
+                this.items.remove(item);
+                break;
+            }
+
+    }
 
     public List<Float> getPrices() {
         List<Float> prices = new ArrayList<>();
